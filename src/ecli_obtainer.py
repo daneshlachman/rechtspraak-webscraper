@@ -30,8 +30,6 @@ counter = 1
 
 # loop through all of the cases, and append the ECLI-codes to a list
 for x in range(int(number_of_results)):
-    if counter > 50:
-        break
     if counter % 10 == 0:
         driver.find_element(By.XPATH, '//*[@id="laadmeer"]').click()
     search_result_element = driver.find_element(By.XPATH,'//*[@id="zoekresultaatregion"]/div/div[{0}]/div[1]/h3/a'.format(i))
@@ -40,10 +38,11 @@ for x in range(int(number_of_results)):
     i += 1
     counter += 1
 
+pdb.set_trace()
+
 # read ECLI codes, and write them to ECLI_list.txt
 text_file = open("./ECLI_list.txt", "w")
 for element in list_of_ECLI:
     text_file.write(element + "\n")
 text_file.close()
-
 driver.quit()
