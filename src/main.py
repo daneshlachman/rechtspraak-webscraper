@@ -6,11 +6,11 @@ import requests
 from bs4 import BeautifulSoup
 from lxml import etree
 
-DRIVER_PATH = r'chromedriver.exe'
-driver = webdriver.Chrome(executable_path=DRIVER_PATH)
+# DRIVER_PATH = r'../chromedriver.exe'
+# driver = webdriver.Chrome(executable_path=DRIVER_PATH)
 url = 'https://uitspraken.rechtspraak.nl/inziendocument?id={0}'
 
-ecli_file = open('ECLI_list.txt', 'r')
+ecli_file = open('../txt_files/ECLI_list.txt', 'r')
 ecli_lines = ecli_file.readlines()
 
 # driver.get(url.format(ecli_lines[0].strip()))
