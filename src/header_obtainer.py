@@ -22,10 +22,11 @@ header_set = set()
 def header_processor(header):
     pre_processed_header = header.text.strip().lstrip("1234567890 .")
     if not len(pre_processed_header) > 45 and not len(pre_processed_header) < 6:
-        if pre_processed_header:
-            if "[…]" not in pre_processed_header:
-                if any(char.isalpha() for char in pre_processed_header):
-                    header_set.add(pre_processed_header)
+        if "[" not in pre_processed_header and "]" not in pre_processed_header:
+            if pre_processed_header:
+                if "[…]" not in pre_processed_header:
+                    if any(char.isalpha() for char in pre_processed_header):
+                        header_set.add(pre_processed_header)
 
 
 count = 0
@@ -50,14 +51,3 @@ for element in list(header_set):
 text_file.close()
 
 print(header_set)
-
-
-
-
-
-# response = requests.get(url.format(ecli_lines[0].strip()))
-# content = response.content
-# parser = BeautifulSoup(content, 'html.parser')
-# body = parser.body
-# producten = body.find(class_="uitspraak")
-# print(producten.prettify())
