@@ -7,9 +7,9 @@ import time
 
 DRIVER_PATH = r'chromedriver.exe'
 driver = webdriver.Chrome(executable_path=DRIVER_PATH)
-driver.get('https://uitspraken.rechtspraak.nl/#zoekverfijn/zt[0][zt]=winkeldiefstal&zt[0][fi]=AlleVelden&zt'
-           '[0][ft]=Alle+velden&dur[dr]=tussen&dur[da]=01-01-2005&dur[db]=01-01-2022&so=Relevance&ps[]=ps1&'
-           'psf[]=psf10&psf[]=psf11&psf[]=psf22')
+driver.get('https://uitspraken.rechtspraak.nl/#zoekverfijn/zt[0][zt]=~winkeldiefstal+~winkeloverval'
+           '&zt[0][fi]=AlleVelden&zt[0][ft]=Alle+velden&dur[dr]=tussen&dur[da]=01-01-2005&dur[db]=01'
+           '-01-2022&so=Relevance&ps[]=ps1&rg[]=r3&ins[]=itRechtbank')
 
 list_of_ECLI = []
 

@@ -73,8 +73,8 @@ for ecli in ecli_lines:
 
         # if tenlastelegging text refers to the bijlage, then the text
         # should be retrieved somewhere else or partially ignored
-        if 'bijlage' in header_text or 'Bijlage' in header_text:
-            header_text = ''
+        # if 'bijlage' in header_text or 'Bijlage' in header_text:
+        #     header_text = ''
 
         print(ecli)
         print(header_text)
