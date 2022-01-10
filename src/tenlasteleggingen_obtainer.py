@@ -13,6 +13,8 @@ url = 'https://uitspraken.rechtspraak.nl/inziendocument?id={0}'
 ecli_file = open('../txt_files/ECLI_list.txt', 'r')
 ecli_lines = ecli_file.readlines()
 
+instantie_xpath = '//*[@id="Main"]/div[2]/dl/dd[1]/span'
+
 tenlastelegging_list = ['inleiding en tenlastelegging', 'vrijspraak primair ten laste gelegde',
                         'ten aanzien van de tenlastelegging', 'tekst tenlastelegging',
                         'tekst gewijzigde tenlastelegging', 'tenlastelegging', 'tenlasteleggingen',
@@ -52,9 +54,26 @@ for ecli in ecli_lines:
     body = parser.body
     uitspraak = body.find(class_="uitspraak")
 
+
+    # get the headers of the uitspraak
+    head = body.find(class_="dl-horizontal")
+
+    # get the rechtbank
+    head.find_all('dd')
+    header_values = head.find_all('span')
+    rechtbank = header_values[0].get_text()
+
+    # get the datum uitspraak
+    date_raw = head.find_all('dd')[1]
+    date = date_raw.get_text()
+
+
+
     # do some preprocessing to recognize the headers effectively, and append tenlastelegging text
     # to a string until a header is encountered
     try:
+
+
         spraaktest = [line for line in uitspraak.text.split('\n') if line.strip() != '']
         in_header = False
         for line in spraaktest:
@@ -78,11 +97,12 @@ for ecli in ecli_lines:
 
         print(ecli)
         print(header_text)
-        list_of_uitspraken.append([ecli.strip(), header_text])
+        list_of_uitspraken.append([ecli.strip(), rechtbank, date, header_text])
     except ValueError:
         print("something wrong with uitspraak")
     count += 1
 
 # write list of ecli and uitspraken to csv file
 uitspraken_dataframe = pd.DataFrame(data=list_of_uitspraken)
-uitspraken_dataframe.to_csv(header=['ecli', 'uitspraak'], path_or_buf='../txt_files/uitspraken.csv')
+uitspraken_dataframe.to_csv(header=['ECLI', 'Rechtbank', 'Datum', 'Uitspraak'],
+                            path_or_buf='../txt_files/uitspraken.csv')
