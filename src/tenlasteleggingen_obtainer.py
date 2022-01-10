@@ -67,18 +67,13 @@ for ecli in ecli_lines:
     date_raw = head.find_all('dd')[1]
     date = date_raw.get_text()
 
-
-
     # do some preprocessing to recognize the headers effectively, and append tenlastelegging text
     # to a string until a header is encountered
     try:
-
-
         spraaktest = [line for line in uitspraak.text.split('\n') if line.strip() != '']
         in_header = False
         for line in spraaktest:
             line = line.strip().lstrip("1234567890 .\t")
-            # pdb.set_trace()
             if line == '':
                 continue
             if line in all_headers_string and in_header:
@@ -86,9 +81,15 @@ for ecli in ecli_lines:
             if line.lower() in tenlastelegging_list:
                 in_header = True
                 continue
+                # if line resides in header, append text to the string
             if in_header:
                 if line.lower() not in list_of_not_valuable_string:
+                    # add a whitespace at the end of a line so that words are not literally concatenated
+                    if header_text != '':
+                        if header_text[-1] != ' ':
+                            header_text += ' '
                     header_text += line
+
 
         # if tenlastelegging text refers to the bijlage, then the text
         # should be retrieved somewhere else or partially ignored
