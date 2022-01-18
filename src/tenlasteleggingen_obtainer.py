@@ -90,12 +90,6 @@ for ecli in ecli_lines:
                             header_text += ' '
                     header_text += line
 
-
-        # if tenlastelegging text refers to the bijlage, then the text
-        # should be retrieved somewhere else or partially ignored
-        # if 'bijlage' in header_text or 'Bijlage' in header_text:
-        #     header_text = ''
-
         print(ecli)
         print(header_text)
         list_of_uitspraken.append([ecli.strip(), rechtbank, date, header_text])
